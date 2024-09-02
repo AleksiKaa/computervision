@@ -22,6 +22,72 @@
 \begin{enumerate}
       \item
 
+            \begin{enumerate}
+
+                  \item The equation of a line is $ax + by + c = 0$. The same equation can be represented in vector notation using $l = \begin{pmatrix}
+                                    a & b & c
+                              \end{pmatrix}^T$ and $x^T = \begin{pmatrix}
+                                    x & y & 1
+                              \end{pmatrix}$ and with the equation:
+                        \begin{align*}
+                              x^T l                         & = 0 \\
+                              \begin{pmatrix}
+                                    x & y & 1
+                              \end{pmatrix} \begin{pmatrix}
+                                                  a & b & c
+                                            \end{pmatrix}^T & = 0 \\
+                              ax + by + c                   & = 0
+                        \end{align*}
+
+                  \item Let $l = \begin{pmatrix}
+                                    a & b & c
+                              \end{pmatrix}^T$ and $l^\prime = \begin{pmatrix}
+                                    a^\prime & b^\prime & c^\prime
+                              \end{pmatrix}^T$ be two lines in a \\ 2-dimensional coordinate system. The intersection point of these lines is
+                        \begin{align*}
+                              \begin{bmatrix}
+                                    x \\ y
+                              \end{bmatrix} & = \begin{bmatrix}
+                                                      \frac{b c^\prime - c b^\prime}{a b^\prime - b a^\prime} \\
+                                                      \frac{c a^\prime - a c^\prime}{a b^\prime - b a^\prime}
+                                                \end{bmatrix}                      \\
+                              \text{or in homogenous coordinates:}                                                           \\
+                              \begin{bmatrix}
+                                    x \\ y \\ w
+                              \end{bmatrix} & = \begin{bmatrix}
+                                                      b c^\prime - c b^\prime \\ c a^\prime - a c^\prime \\ a b^\prime - b a^\prime
+                                                \end{bmatrix}
+                        \end{align*}
+
+                        Let us show that the intersection point $x$ is defined also as $l \times l^\prime$:
+                        \begin{align*}
+                              x & = l \times l^\prime                                                            \\
+                              x & = \begin{bmatrix}
+                                          b c^\prime - c b^\prime \\ c a^\prime - a c^\prime \\ a b^\prime - b a^\prime
+                                    \end{bmatrix}
+                        \end{align*}
+
+                  \item Let $x = \begin{bmatrix}
+                                    a & b & 1
+                              \end{bmatrix}^T$ and $x^\prime = \begin{bmatrix}
+                                    a^\prime & b^\prime & 1
+                              \end{bmatrix}^T$ be points in the \\ 2-dimensional coordinate system.
+                        The line through $l$ through these points is thus $x \times x^\prime$.
+                        \begin{align*}
+                              l & = x \times x^\prime                            \\
+                                & = \begin{bmatrix}
+                                          a \\ b \\ 1
+                                    \end{bmatrix} \times \begin{bmatrix}
+                                                               a^\prime \\ b^\prime \\1
+                                                         \end{bmatrix} \\
+                                & = \begin{bmatrix}
+                                    b - b^\prime \\
+                                    a - a^\prime \\
+                                    a b^\prime - b a^\prime
+                                \end{bmatrix}
+                        \end{align*}
+            \end{enumerate}
+
             \newpage
 
       \item
