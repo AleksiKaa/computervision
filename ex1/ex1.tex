@@ -44,8 +44,8 @@
                         Thus the homogenous coordinate $x = l \times l^\prime$ lies on both lines $l$ and $l^\prime$, since it
                         fulfills both of the equations
                         \begin{align*}
-                              x^T l          & = (l \times l^\prime)l        & = 0 \\
-                              \text{and}                                           \\
+                              x^T l          & = (l \times l^\prime)l        & = 0  \\
+                              \text{and}                                            \\
                               x^T l^{\prime} & = (l \times l^\prime)l^\prime & = 0.
                         \end{align*}
 
@@ -76,6 +76,80 @@
             \newpage
 
       \item
+
+            \begin{enumerate}
+
+                  \item Translation:
+                        \begin{align*}
+                              T = \begin{bmatrix}
+                                        1 & 0 & t_x \\
+                                        0 & 1 & t_y \\
+                                        0 & 0 & 1
+                                  \end{bmatrix}
+                        \end{align*}
+
+                        Euclidean transformation:
+                        \begin{align*}
+                              E = \begin{bmatrix}
+                                        r_{11} & r_{12} & t_x \\
+                                        r_{21} & r_{22} & t_y \\
+                                        0      & 0      & 1
+                                  \end{bmatrix}
+                        \end{align*}
+
+                        Similarity transformation:
+                        \begin{align*}
+                              S = \begin{bmatrix}
+                                        sr_{11} & sr_{12} & t_x \\
+                                        sr_{21} & sr_{22} & t_y \\
+                                        0       & 0       & 1
+                                  \end{bmatrix}
+                        \end{align*}
+
+                        Affine transformation:
+                        \begin{align*}
+                              A = \begin{bmatrix}
+                                        a_{11} & a_{12} & t_x \\
+                                        a_{21} & a_{22} & t_y \\
+                                        0      & 0      & 1
+                                  \end{bmatrix}
+                        \end{align*}
+
+                        Projective transformation:
+                        \begin{align*}
+                              P = \begin{bmatrix}
+                                        h_{11} & h_{12} & h_{13} \\
+                                        h_{21} & h_{22} & h_{23} \\
+                                        h_{31} & h_{32} & h_{33}
+                                  \end{bmatrix}
+                        \end{align*}
+
+                  \item Degrees of freedom:
+
+                        Translation: 2 \\
+                        Euclidean: 3 \\
+                        Similarity: 4 \\
+                        Affine: 6 \\
+                        Projective: 8
+
+                  \item The degrees of freedom in the projective transformation matrix is less than the number of
+                        elements in the matrix, since the transformation can be scaled with a coefficient $k$. Let
+                        $k = h_{11}$. Thus:
+                        \begin{align*}
+                              P & = k \begin{bmatrix}
+                                            1        & h_{12}/k & h_{13}/k \\
+                                            h_{21}/k & h_{22}/k & h_{23}/k \\
+                                            h_{31}/k & h_{32}/k & h_{33}/k
+                                      \end{bmatrix} \\
+                              P & = k \begin{bmatrix}
+                                            1      & s_{12} & s_{13} \\
+                                            s_{21} & s_{22} & s_{23} \\
+                                            s_{31} & s_{32} & s_{33}
+                                      \end{bmatrix},
+                        \end{align*}
+                        showing that the matrix has only 8 degrees of freedom.
+            \end{enumerate}
+
 
             \newpage
 
