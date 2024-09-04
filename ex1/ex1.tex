@@ -39,53 +39,38 @@
                               ax + by + c                   & = 0
                         \end{align*}
 
-                  \item Let $l = \begin{pmatrix}
-                                    a & b & c
-                              \end{pmatrix}^T$ and $l^\prime = \begin{pmatrix}
-                                    a^\prime & b^\prime & c^\prime
-                              \end{pmatrix}^T$ be two lines in a \\ 2-dimensional coordinate system. The intersection point of these lines is
+                  \item By definition, the cross product $a \times b$ results in a vector that is perpendicular to
+                        both of the input vectors. The result of the cross product can be interpreted as a homogenous coordinate point.
+                        Thus the homogenous coordinate $x = l \times l^\prime$ lies on both lines $l$ and $l^\prime$, since it
+                        fulfills both of the equations
                         \begin{align*}
-                              \begin{bmatrix}
-                                    x \\ y
-                              \end{bmatrix} & = \begin{bmatrix}
-                                                      \frac{b c^\prime - c b^\prime}{a b^\prime - b a^\prime} \\
-                                                      \frac{c a^\prime - a c^\prime}{a b^\prime - b a^\prime}
-                                                \end{bmatrix}                      \\
-                              \text{or in homogenous coordinates:}                                                           \\
-                              \begin{bmatrix}
-                                    x \\ y \\ w
-                              \end{bmatrix} & = \begin{bmatrix}
-                                                      b c^\prime - c b^\prime \\ c a^\prime - a c^\prime \\ a b^\prime - b a^\prime
-                                                \end{bmatrix}
+                              x^T l          & = (l \times l^\prime)l        & = 0 \\
+                              \text{and}                                           \\
+                              x^T l^{\prime} & = (l \times l^\prime)l^\prime & = 0.
                         \end{align*}
 
-                        Let us show that the intersection point $x$ is defined also as $l \times l^\prime$:
+                  \item The cross product $l=x \times x^\prime$ gives a vector $l$ that is perpendicular to the plane
+                        defined by $x$ and $x^\prime$. This vector $l$ represents the line that passes through both points $x$ and $x^\prime$.
+                        To check, we need to ensure that both points $x$ and $x^\prime$ lie on the line:
                         \begin{align*}
-                              x & = l \times l^\prime                                                            \\
-                              x & = \begin{bmatrix}
-                                          b c^\prime - c b^\prime \\ c a^\prime - a c^\prime \\ a b^\prime - b a^\prime
-                                    \end{bmatrix}
+                              l^T x        & = (x \times x^\prime)^T x        & = 0, \\
+                              \text{and}                                             \\
+                              l^T x^\prime & = (x \times x^\prime)^T x^\prime & = 0.
                         \end{align*}
 
-                  \item Let $x = \begin{bmatrix}
-                                    a & b & 1
-                              \end{bmatrix}^T$ and $x^\prime = \begin{bmatrix}
-                                    a^\prime & b^\prime & 1
-                              \end{bmatrix}^T$ be points in the \\ 2-dimensional coordinate system.
-                        The line through $l$ through these points is thus $x \times x^\prime$.
+                        These equations hold because the cross product of two vectors is orthogonal to each of the original vectors.
+                        Thus, the line through the points $x$ and $x^\prime$ is indeed given by $l = x \times x^\prime$.
+
+                  \item From (c), it is known that the line through points $x$ and $x^\prime$ is $l = x \times x^\prime$.
+                        To show that the point $y$ lies on the line, we need to show that:
                         \begin{align*}
-                              l & = x \times x^\prime                            \\
-                                & = \begin{bmatrix}
-                                          a \\ b \\ 1
-                                    \end{bmatrix} \times \begin{bmatrix}
-                                                               a^\prime \\ b^\prime \\1
-                                                         \end{bmatrix} \\
-                                & = \begin{bmatrix}
-                                    b - b^\prime \\
-                                    a - a^\prime \\
-                                    a b^\prime - b a^\prime
-                                \end{bmatrix}
+                              l^T y                                                                     & = 0 \\
+                              (x \times x^\prime)(\alpha x + (1 + \alpha)x^\prime)                      & = 0 \\
+                              (x \times x^\prime)(\alpha x) + (x \times x^\prime)((1 + \alpha)x^\prime) & = 0 \\
+                              \alpha(x \times x^\prime)x + (1 + \alpha)(x \times x^\prime)x^\prime      & = 0
                         \end{align*}
+                        Since $x \times x^\prime$ is perpendicular to both $x$ and $x^\prime$, both terms in the equation
+                        are 0 for any $\alpha \in \mathbb{R}$, meaning that $y$ is on the line.
             \end{enumerate}
 
             \newpage
