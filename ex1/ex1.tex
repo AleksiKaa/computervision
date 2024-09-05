@@ -79,44 +79,32 @@
 
             \begin{enumerate}
 
-                  \item Translation:
-                        \begin{align*}
+                  \item \begin{align*}
+                              \intertext{Translation:}
                               T = \begin{bmatrix}
                                         1 & 0 & t_x \\
                                         0 & 1 & t_y \\
                                         0 & 0 & 1
                                   \end{bmatrix}
-                        \end{align*}
-
-                        Euclidean transformation:
-                        \begin{align*}
+                              \intertext{Euclidean transformation:}
                               E = \begin{bmatrix}
                                         r_{11} & r_{12} & t_x \\
                                         r_{21} & r_{22} & t_y \\
                                         0      & 0      & 1
                                   \end{bmatrix}
-                        \end{align*}
-
-                        Similarity transformation:
-                        \begin{align*}
+                              \intertext{Similarity transformation:}
                               S = \begin{bmatrix}
                                         sr_{11} & sr_{12} & t_x \\
                                         sr_{21} & sr_{22} & t_y \\
                                         0       & 0       & 1
                                   \end{bmatrix}
-                        \end{align*}
-
-                        Affine transformation:
-                        \begin{align*}
+                              \intertext{Affine transformation:}
                               A = \begin{bmatrix}
                                         a_{11} & a_{12} & t_x \\
                                         a_{21} & a_{22} & t_y \\
                                         0      & 0      & 1
                                   \end{bmatrix}
-                        \end{align*}
-
-                        Projective transformation:
-                        \begin{align*}
+                              \intertext{Projective transformation:}
                               P = \begin{bmatrix}
                                         h_{11} & h_{12} & h_{13} \\
                                         h_{21} & h_{22} & h_{23} \\
@@ -147,13 +135,55 @@
                                             s_{31} & s_{32} & s_{33}
                                       \end{bmatrix},
                         \end{align*}
-                        showing that the matrix has only 8 degrees of freedom.
+                        showing that the matrix actually has only 8 degrees of freedom.
             \end{enumerate}
 
 
             \newpage
 
-      \item
+      \item \begin{enumerate}
+
+                  \item After transformation, the following equation holds:
+                        \begin{align*}
+                              (l^\prime)^T x^\prime & = 0            \\
+                              (l^\prime)^T Hx       & = 0
+                              \intertext{The following correspondence is obtained:}
+                              (l^\prime)^T H        & = l^T          \\
+                              \intertext{Solve for $l^\prime$. Transpose both sides:}
+                              l^\prime H^T          & = l            \\
+                              \intertext{Multiply by $(H^{-1})^T$:}
+                              l^\prime              & = (H^{-1})^T l
+                        \end{align*}
+
+                  \item Part 1: Under projective transformation, using the transformation rules from part (a), the term
+                        $l_1^T x_1$ becomes:
+                        \begin{align*}
+                                & (l_1^\prime)^T x^\prime  \\
+                              = & ((H^{-1})^T l_1)^T H x_1 \\
+                              = & H^{-1}l_1^T H x_1        \\
+                              = & l_1^T x_1
+                        \end{align*}
+                        This holds for all the other terms in $I$ as well, resulting in an unchanged $I$ after
+                        projective transformation, meaning that $I$ is projective invariant.
+
+                        Part 2: Assume that $I^\prime = \frac{l_1^T x_1}{l_1^T x_2}$ is projective invariant.
+                        This means that $I^\prime$ is also invariant to arbitrary scaling of the coordinate vectors.
+                        Let us scale each of the vectors in $I^\prime$:
+                        \begin{align*}
+                              I^\prime & = \frac{\alpha l_1^T \beta x_1}{\alpha l_1^T \gamma x_2} \\
+                                       & = \frac{\beta}{\gamma} \cdot \frac{l_1^T x_1}{l_1^T x_2}
+                        \end{align*}
+                        This shows that $I^\prime$ is not invariant to scaling, meaning that $I^\prime$ can't be
+                        projective invariant.
+
+                        For reference, let's show that $I$ is also invariant to scaling:
+                        \begin{align*}
+                              I & = \frac{(\alpha l_1^T \beta x_1)(\gamma l_2^T \delta x_2)}{(\alpha l_1^T \delta x_2)(\gamma l_2^T \beta x_1)}               \\
+                                & = \frac{\alpha \beta \gamma \delta}{\alpha \beta \gamma \delta} \cdot \frac{(l_1^T x_1)(l_2^T x_2)}{(l_1^T x_2)(l_2^T x_1)} \\
+                                & = \frac{(l_1^T x_1)(l_2^T x_2)}{(l_1^T x_2)(l_2^T x_1)}
+                        \end{align*}
+
+            \end{enumerate}
 
             \newpage
 
