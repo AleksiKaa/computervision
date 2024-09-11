@@ -34,7 +34,8 @@
 
           \begin{enumerate}
 
-              \item To transform the image coordinates to pixel units, we need to scale the coordinates with the pixel per unit distances and shift them with the principal point:
+              \item To transform the image coordinates to pixel units, we need to scale the coordinates with the
+                    pixel per unit distances and shift them with the principal point:
                     \begin{align*}
                         p = \begin{bmatrix}
                                 m_u x_p + u_0 \\
@@ -42,18 +43,154 @@
                             \end{bmatrix}
                     \end{align*}
 
+              \item Since the $u$ axis is parallel to the $x$ axis, $p_u$ remains unchanged. The angle between
+                    the $u$ and $v$ axis is $\theta$, so it needs to be scaled with the cosine of the angle.
+                    \begin{align*}
+                        p = \begin{bmatrix}
+                                m_u x_p + u_0 \\
+                                m_v y_p \cos{\theta} + v_0
+                            \end{bmatrix}
+                    \end{align*}
+
           \end{enumerate}
           \newpage
 
-    \item
+    \item Find a matrix $K_{3 \times 3}$, such that $\tilde{p} = K x_c$.
+          \begin{align*}
+              \begin{bmatrix}
+                  m_u x_p + u_0 \\
+                  m_v y_p + v_0 \\
+                  1
+              \end{bmatrix}                 & = K \begin{bmatrix}
+                                                      x_c \\
+                                                      y_c \\
+                                                      z_c
+                                                  \end{bmatrix}
+              \intertext{Substitute equalities from exercice 1 for $x_p, y_p$}
+              \begin{bmatrix}
+                  m_u (f \frac{x_c}{z_c}) + u_0 \\
+                  m_v (f \frac{y_c}{z_c}) + v_0 \\
+                  1
+              \end{bmatrix} & = K \begin{bmatrix}
+                                      x_c \\
+                                      y_c \\
+                                      z_c
+                                  \end{bmatrix}
+              \intertext{Results in system of equations:}
+                                               & \begin{cases*}
+                                                     k_1 x_c + k_2 y_c + k_3 z_c = m_u (f \frac{x_c}{z_c}) + u_0 \\
+                                                     k_4 x_c + k_5 y_c + k_6 z_c = m_v (f \frac{y_c}{z_c}) + v_0 \\
+                                                     k_7 x_c + k_8 y_c + k_9 z_c = 1                             \\
+                                                 \end{cases*} \\
+                                               & \begin{cases*}
+                                                     k_1 x_c + k_3 z_c = m_u (f \frac{x_c}{z_c}) + u_0 \\
+                                                     k_5 y_c + k_6 z_c = m_v (f \frac{y_c}{z_c}) + v_0 \\
+                                                     k_9 z_c = 1                                       \\
+                                                 \end{cases*}           \\
+              K                                & = \begin{bmatrix}
+                                                       \frac{m_u f}{z_c} & 0                 & \frac{u_0}{z_c} \\
+                                                       0                 & \frac{m_v f}{z_c} & \frac{v_0}{z_c} \\
+                                                       0                 & 0                 & \frac{1}{z_c}
+                                                   \end{bmatrix}   \\
+              \intertext{Scale with $z_c$:}
+              K                                & = \begin{bmatrix}
+                                                       m_u f & 0     & u_0 \\
+                                                       0     & m_v f & v_0 \\
+                                                       0     & 0     & 1
+                                                   \end{bmatrix}
+          \end{align*}
+
+          \newpage
+
+    \item From lecture 1 slides:
+          \begin{align*}
+              P_{3 \times 4} & = K[R | t]                                                   \\
+                             & = \begin{bmatrix}
+                                     m_u f & 0     & u_0 \\
+                                     0     & m_v f & v_0 \\
+                                     0     & 0     & 1
+                                 \end{bmatrix} \begin{bmatrix}
+                                                   1 & 0 & 0 & 0 \\
+                                                   0 & 1 & 0 & 0 \\
+                                                   0 & 0 & 1 & 0 \\
+                                               \end{bmatrix} \begin{bmatrix}
+                                                                 r_{11} & r_{12} & r_{13} & t_1 \\
+                                                                 r_{21} & r_{22} & r_{23} & t_2 \\
+                                                                 r_{31} & r_{32} & r_{33} & t_3 \\
+                                                                 0      & 0      & 0      & 1
+                                                             \end{bmatrix} \\
+              P              & = \begin{bmatrix}
+                                     m_u f & 0     & u_0 \\
+                                     0     & m_v f & v_0 \\
+                                     0     & 0     & 1
+                                 \end{bmatrix}\begin{bmatrix}
+                                                  r_{11} & r_{12} & r_{13} & t_1 \\
+                                                  r_{21} & r_{22} & r_{23} & t_2 \\
+                                                  r_{31} & r_{32} & r_{33} & t_3 \\
+                                              \end{bmatrix}
+          \end{align*}
 
           \newpage
 
     \item
 
-          \newpage
+          \begin{enumerate}
+              \item Any vector $x$ can be decomposed into two components:
+                    \begin{itemize}
+                        \item A parallel component wrt. rotation axis $u$: $x_{\parallel}$
+                        \item A perpendicular component wrt. rotation axis $u$: $x_{\perp}$
+                    \end{itemize}
+                    \begin{align*}
+                        x               & = x_{\parallel} + x_{\perp}
+                        \intertext{The parallel component is the projection of $x$ onto $u$:}
+                        x_{\parallel}   & = (u \cdot x) u
+                        \intertext{And the perpendicular component is the difference of the vectors $x$ and $x_{\parallel}$}
+                        x_{\perp}       & = x - x_{\parallel} = x - (u \cdot x) u
+                        \intertext{The parallel component is unchanged after the rotation:}
+                        R x_{\parallel} & = (u \cdot x) u
+                        \intertext{The perpendicular component after rotation becomes:}
+                        R x_{\perp}     & = \cos{\theta} x_{\perp} + \sin{\theta}(u \times x) = \cos{\theta} x - (u \cdot x) u + \sin{\theta}(u \times x)
+                        \intertext{Combine the results:}
+                        Rx              & = (u \cdot x) u + \cos{\theta} (x - (u \cdot x)u) + \sin{\theta}(u \times x)                                    \\
+                        Rx              & = (u \cdot x) u + \cos{\theta}x - \cos{\theta} (u \cdot x)u + \sin{\theta}(u \times x)                          \\
+                        Rx              & = \cos{\theta}x + \sin{\theta}(u \times x) + (1 - \cos{\theta})(u \cdot x)u
+                    \end{align*}
 
-    \item
+              \item The cross product and dot product are:
+                    \begin{align*}
+                        u \times x   & = \begin{bmatrix}
+                                             u_2 x_3 - u_3 x_2 \\
+                                             u_3 x_1 - u_1 x_3 \\
+                                             u_1 x_2 - u_2 x_1
+                                         \end{bmatrix}   = \begin{bmatrix}
+                                                               0    & - u_3 & u_2 \\
+                                                               -u_3 & 0     & u_2 \\
+                                                               -u_2 & u_1   & 0
+                                                           \end{bmatrix} x = Kx                                                                   \\
+                        (u \cdot x)u & = (u_1 x_1 + u_2 x_2 + u_3 x_3)u = \begin{bmatrix}
+                                                                              u_1^2   & u_1 u_2 & u_1 u_3 \\
+                                                                              u_1 u_2 & u_2^2   & u_2 u_3 \\
+                                                                              u_1 u_3 & u_2 u_3 & u_3^2   \\
+                                                                          \end{bmatrix} x = Ux
+                        \intertext{Substitute these equalities into $Rx$:}
+                        Rx           & = \cos{\theta}x + \sin{\theta}Kx + (1 - \cos{\theta})Ux
+                        \intertext{$R$ is not dependent on $x$ anymore, divide $x$ out from both sides:}
+                        R            & = \cos{\theta} I + \sin{\theta}K + (1 - \cos{\theta})U                                                     \\
+                        R            & = \cos{\theta} \begin{bmatrix}
+                                                          1 & 0 & 0 \\
+                                                          0 & 1 & 0 \\
+                                                          0 & 0 & 1 \\
+                                                      \end{bmatrix} + \sin{\theta} \begin{bmatrix}
+                                                                                       0    & - u_3 & u_2 \\
+                                                                                       -u_3 & 0     & u_2 \\
+                                                                                       -u_2 & u_1   & 0
+                                                                                   \end{bmatrix} + (1 - \cos{\theta}) \begin{bmatrix}
+                                                                                                                          u_1^2   & u_1 u_2 & u_1 u_3 \\
+                                                                                                                          u_1 u_2 & u_2^2   & u_2 u_3 \\
+                                                                                                                          u_1 u_3 & u_2 u_3 & u_3^2   \\
+                                                                                                                      \end{bmatrix} \\
+                    \end{align*}
+          \end{enumerate}
 
           \newpage
 
